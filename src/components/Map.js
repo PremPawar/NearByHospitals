@@ -30,8 +30,8 @@ const Map = () => {
 
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const myLoc =  { lng: viewport.latitude, lat: viewport.longitude };
-  
+    const myLoc = { lng: viewport.latitude, lat: viewport.longitude };
+
     const [zoom] = useState(14);
     maptilersdk.config.apiKey = 'gewWsD16NesKhv75SiBa';
 
@@ -43,16 +43,20 @@ const Map = () => {
             zoom: zoom
         });
 
-    }, [viewport.longitude, viewport.latitude, zoom]);
+        new maptilersdk.Marker({ color: "#FF0000" })
+            .setLngLat([viewport.longitude, viewport.latitude])
+            .addTo(map.current);
+
+}, [viewport.longitude, viewport.latitude, zoom]);
 
 
-    console.log('loc', myLoc.lng, myLoc.lat);
+console.log('loc', myLoc.lng, myLoc.lat);
 
-    return (
-        <div className="map-wrap">
-            <div ref={mapContainer} className="map" />
-        </div>
-    )
+return (
+    <div className="map-wrap">
+        <div ref={mapContainer} className="map" />
+    </div>
+)
 }
 
 export default Map
